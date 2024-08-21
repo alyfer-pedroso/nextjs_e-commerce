@@ -1,7 +1,15 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 
-export const CartContext = createContext<any>(null);
+interface ContextProps {
+  quantity: number;
+  increase?: () => void;
+  decrease?: () => void;
+}
+
+export const CartContext = createContext<ContextProps>({} as ContextProps);
 
 export function CartProvider(props: any) {
-  return <CartContext.Provider value={{}}>{props.children}</CartContext.Provider>;
+  const [quantity, setQuantity] = useState(0);
+
+  return <CartContext.Provider value={{ quantity }}>{props.children}</CartContext.Provider>;
 }
