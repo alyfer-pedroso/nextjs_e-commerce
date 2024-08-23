@@ -1,4 +1,4 @@
-import { Header } from ".";
+import { Header } from "..";
 
 export interface PageProps {
   children: React.ReactNode;

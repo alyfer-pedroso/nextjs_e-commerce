@@ -1,4 +1,4 @@
-import { Cart, Logo } from ".";
+import { Cart, Logo } from "..";
 
 export function Header() {
   return (

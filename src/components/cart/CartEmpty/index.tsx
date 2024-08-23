@@ -1,7 +1,7 @@
 import { IconShoppingCartOff } from "@tabler/icons-react";
 import Link from "next/link";
 
-export function CartEmptyArea() {
+export function CartEmpty() {
   return (
     <div className="flex flex-col items-center gap-4 text-zinc-500">
       <IconShoppingCartOff size={150} stroke={0.5} />

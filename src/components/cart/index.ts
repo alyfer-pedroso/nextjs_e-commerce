@@ -1,3 +1,3 @@
-export { CartItemArea } from "./CartItemArea";
-export { CartEmptyArea } from "./CartEmptyArea";
+export { CartItem } from "./CartItem";
+export { CartEmpty } from "./CartEmpty";
 export { CartTotal } from "./CartTotal";

@@ -1,5 +1,5 @@
 "use client";
-import { ProductCart } from "@/components/product/ProductCart";
+import { ProductCart } from "@/components/product";
 import { Page } from "@/components/template";
 import { products } from "@/data/constants";
 

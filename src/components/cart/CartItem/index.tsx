@@ -1,16 +1,21 @@
-import { ItemCart } from "@/data/model";
-import { IconMinus, IconPlus, IconX } from "@tabler/icons-react";
+import Link from "next/link";
 import Image from "next/image";
 
-export interface CartItemAreaProps {
+import { ItemCart } from "@/data/model";
+import { IconMinus, IconPlus, IconX } from "@tabler/icons-react";
+
+export interface CartItemProps {
   item: ItemCart;
   addItem?: (item: ItemCart) => void;
   removeItem?: (item: ItemCart) => void;
 }
 
-export function CartItemArea(props: CartItemAreaProps) {
+export function CartItem(props: CartItemProps) {
   return (
-    <div className="flex items-center gap-5 bg-zinc-900 rounded-md overflow-hidden">
+    <Link
+      href={{ pathname: "/product", query: { id: props.item.product.id } }}
+      className="flex items-center gap-5 bg-zinc-900 rounded-md overflow-hidden transition-transform hover:scale-105"
+    >
       <div className="relative w-28 h-28">
         <Image src={props.item.product.image} alt={props.item.product.name} fill className="object-cover" />
       </div>
@@ -25,7 +30,7 @@ export function CartItemArea(props: CartItemAreaProps) {
           <span className="text-yellow-500">R$ {(props.item.product.price * props.item.quantity).toFixed(2)}</span>
         </div>
       </div>
-      <div className="flex gap-2 items-center px-5">
+      <div className="flex gap-2 items-center px-5 [&>button:hover]:bg-zinc-700 [&>button]:rounded-md">
         <button onClick={() => props.removeItem?.(props.item)}>
           <IconMinus />
         </button>
@@ -34,6 +39,6 @@ export function CartItemArea(props: CartItemAreaProps) {
           <IconPlus />
         </button>
       </div>
-    </div>
+    </Link>
   );
 }
