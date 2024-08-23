@@ -1,9 +1,9 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { Page } from "@/components/template";
 
-export default function ProductPage() {
+function Product() {
   const [id, setId] = useState<string | null>("");
   const searchParams = useSearchParams();
 
@@ -13,4 +13,12 @@ export default function ProductPage() {
   }, [searchParams]);
 
   return <Page>ID do Produto: {id}</Page>;
+}
+
+export default function ProductPage() {
+  return (
+    <Suspense>
+      <Product />
+    </Suspense>
+  );
 }
