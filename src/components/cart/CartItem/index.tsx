@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 import { ItemCart } from "@/data/model";
@@ -11,10 +11,13 @@ export interface CartItemProps {
 }
 
 export function CartItem(props: CartItemProps) {
+  const router = useRouter();
+  const { id } = props.item.product;
+
   return (
-    <Link
-      href={{ pathname: "/product", query: { id: props.item.product.id } }}
-      className="flex items-center gap-5 bg-zinc-900 rounded-md overflow-hidden transition-transform hover:scale-105"
+    <div
+      onClick={() => router.push(`/product?id=${id}`)}
+      className="flex items-center gap-5 bg-zinc-900 rounded-md overflow-hidden transition-transform hover:scale-105 cursor-pointer hover:bg-zinc-800"
     >
       <div className="relative w-28 h-28">
         <Image src={props.item.product.image} alt={props.item.product.name} fill className="object-cover" />
@@ -31,14 +34,24 @@ export function CartItem(props: CartItemProps) {
         </div>
       </div>
       <div className="flex gap-2 items-center px-5 [&>button:hover]:bg-zinc-700 [&>button]:rounded-md">
-        <button onClick={() => props.removeItem?.(props.item)}>
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            props.removeItem?.(props.item);
+          }}
+        >
           <IconMinus />
         </button>
         <span className="flex px-4 py-2 rounded-md bg-black text-sm">{props.item.quantity}</span>
-        <button onClick={() => props.addItem?.(props.item)}>
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            props.addItem?.(props.item);
+          }}
+        >
           <IconPlus />
         </button>
       </div>
-    </Link>
+    </div>
   );
 }

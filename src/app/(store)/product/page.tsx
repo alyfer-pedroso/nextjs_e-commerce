@@ -1,15 +1,16 @@
 "use client";
-import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { Page } from "@/components/template";
 
 export default function ProductPage() {
-  const { id } = useParams();
+  const [id, setId] = useState<string | null>("");
+  const searchParams = useSearchParams();
 
-  console.log(id);
+  useEffect(() => {
+    const id = searchParams.get("id");
+    setId(id);
+  }, [searchParams]);
 
-  return (
-    <div className="text-white">
-      ID:
-      {id}
-    </div>
-  );
+  return <Page>ID do Produto: {id}</Page>;
 }
